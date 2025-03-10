@@ -3,6 +3,8 @@
 let listaAmigos = []
 let entradaNomeAmigo
 let exibirNomeAmigo
+let indiceAleatorio
+let nomeSorteado
 
 function limparEntrada(){
     entrada = document.querySelector('input');
@@ -20,7 +22,18 @@ function atualizarLista() {
     });
 }
 
+function limpaSorteio(){
+    nomeSorteado = document.getElementById('resultado')
+    nomeSorteado.innerHTML= ""
+}
+
+function limpaLista (){
+    listaAmigos = []
+    atualizarLista()
+}
+
 function adicionarAmigo(){
+    limpaSorteio()
     entradaNomeAmigo = document.querySelector('input')
     if (entradaNomeAmigo.value == "" ){
         alert("Por favor, insira um nome.")
@@ -28,11 +41,18 @@ function adicionarAmigo(){
     }else {
         listaAmigos.push(entradaNomeAmigo.value)
         limparEntrada()
-        console.log(listaAmigos)
         listaExibicao = document.getElementById('listaAmigos')
         listaExibicao.value= listaAmigos
         atualizarLista()
     }
-    
-
+}
+function sortearAmigo(){
+    if(listaAmigos.length == 0){
+        alert("Por favor, insira um nome.")
+    }else {
+        indiceAleatorio = Math.random() * listaAmigos.length
+        nomeSorteado = document.getElementById('resultado')
+        nomeSorteado.innerHTML= listaAmigos[Math.floor(indiceAleatorio)]
+        limpaLista ()
+    }
 }
